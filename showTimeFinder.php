@@ -18,7 +18,7 @@
 require_once('simple_html_dom.php');
 
 $curl = curl_init();
-curl_setopt($curl, CURLOPT_URL, 'http://www.google.ie/movies?near=27298');
+curl_setopt($curl, CURLOPT_URL, 'http://www.google.com/movies?near=27298');
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
 $str = curl_exec($curl);
