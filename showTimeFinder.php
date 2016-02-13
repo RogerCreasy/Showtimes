@@ -41,4 +41,3 @@ foreach($html->find('#movie_results .theater') as $div) {
 
 // clean up memory
 $html->clear();
-?>
