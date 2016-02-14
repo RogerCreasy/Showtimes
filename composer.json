@@ -1,0 +1,6 @@
+
+{
+  "require": {
+    "mgargano/simplehtmldom": "1.*"
+  }
+}
