@@ -15,7 +15,13 @@
  *
  */
 
-require_once('simple_html_dom.php');
+//TODO remove this file from structure
+require __DIR__ . '/vendor/autoload.php';
+
+use function SimpleHtmlDom\str_get_html;
+use SimpleHtmlDom\simple_html_dom_node;
+
+//require_once('simple_html_dom.php');
 
 $curl = curl_init();
 curl_setopt($curl, CURLOPT_URL, 'http://www.google.com/movies?near=27298');
@@ -25,9 +31,12 @@ $str = curl_exec($curl);
 curl_close($curl);
 
 $html = str_get_html($str);
+$dom = new simple_html_dom_node($html);
+//$html = $dom->str_get_html($str);
+var_dump($dom);
 
 print '<pre>';
-foreach($html->find('#movie_results .theater') as $div) {
+foreach($dom->find('#movie_results .theater') as $div) {
     // print theater and address info
     print "Theatre:  ".$div->find('h2 a',0)->innertext."\n";
 
@@ -40,4 +49,4 @@ foreach($html->find('#movie_results .theater') as $div) {
 }
 
 // clean up memory
-$html->clear();
+$dom->clear();

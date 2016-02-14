@@ -19,6 +19,8 @@ foreach($html->find('#movie_results .theater') as $div) {
     // print theater and address info
     print "Theatre:  ".$div->find('h2 a',0)->innertext."\n";
 
+    //TODO improve output formatting
+    //TODO add links to trailers and movie detail info
     // print all the movies with showtimes
     foreach($div->find('.movie') as $movie) {
         print "Movie:    ".$movie->find('.name a',0)->innertext.'<br />';
