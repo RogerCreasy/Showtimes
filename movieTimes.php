@@ -6,35 +6,26 @@
  * Time: 5:57 PM
  */
 
-# Use the Curl extension to query Google and get back a page of results
-$url = "http://www.google.com/movies?near=27298";
-$ch = curl_init();
-$timeout = 5;
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-$html = curl_exec($ch);
-curl_close($ch);
 
+require __DIR__ . '/vendor/autoload.php';
 
-# Create a DOM parser object
-$dom = new DOMDocument();
+use function SimpleHtmlDom\file_get_html;
+use SimpleHtmlDom\simple_html_dom_node;
 
-# Parse the HTML from Google.
-# The @ before the method call suppresses any warnings that
-# loadHTML might throw because of invalid HTML in the page.
-@$dom->loadHTML($html);
+$html = file_get_html('http://www.google.com/movies?near=27298');
 
-foreach($dom->getElementById('#movieResults') as $div)
-{
-    echo "Theatre:  ".$div->find('h2 a',0)->innertext."\n";
+print '<pre>';
+foreach($html->find('#movie_results .theater') as $div) {
+    // print theater and address info
+    print "Theatre:  ".$div->find('h2 a',0)->innertext."\n";
+
+    // print all the movies with showtimes
+    foreach($div->find('.movie') as $movie) {
+        print "Movie:    ".$movie->find('.name a',0)->innertext.'<br />';
+        print "Time:    ".$movie->find('.times',0)->innertext.'<br />';
+    }
+    print "\n\n";
 }
 
-
-echo "##########################################################################";
-# Iterate over all the <a> tags
-foreach($dom->getElementsByTagName('a') as $link) {
-    # Show the <a href>
-    echo $link->getAttribute('href');
-    echo "<br />";
-}
+// clean up memory
+$dom->clear();
