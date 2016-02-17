@@ -10,7 +10,7 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use function SimpleHtmlDom\file_get_html;
-use SimpleHtmlDom\simple_html_dom_node;
+//use SimpleHtmlDom\simple_html_dom_node;
 
 $html = file_get_html('http://www.google.com/movies?near=27298');
 
