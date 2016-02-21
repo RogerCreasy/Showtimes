@@ -6,4 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'SimpleHtmlDom\\simple_html_dom' => $vendorDir . '/mgargano/simplehtmldom/src/simple_html_dom.php',
+    'SimpleHtmlDom\\simple_html_dom_node' => $vendorDir . '/mgargano/simplehtmldom/src/simple_html_dom.php',
+    'src\\movieTimes' => $baseDir . '/src/movieTimes.php',
 );

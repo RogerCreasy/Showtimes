@@ -2,5 +2,12 @@
 {
   "require": {
     "mgargano/simplehtmldom": "1.*"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "src\\": "src/",
+      "Vendor\\Namespace\\": ""
+    }
   }
 }
