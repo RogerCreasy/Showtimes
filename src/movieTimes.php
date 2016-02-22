@@ -9,7 +9,6 @@
 namespace src;
 
 use function SimpleHtmlDom\file_get_html;
-//use SimpleHtmlDom\simple_html_dom_node;
 
 class movieTimes
 {
@@ -22,17 +21,26 @@ class movieTimes
         return $this->generateList();
     }
 
+    /**
+     * @param $zip
+     * set $HTML to the Google URL
+     */
     protected function setHTML($zip)
     {
         $this->html = file_get_html('http://www.google.com/movies?near=' . $zip);
     }
 
+    /**
+     * the real work is done here
+     * parse the DOM for the desired info
+     */
     protected function generateList()
     {
         $this->output = '<pre>';
         foreach($this->html->find('#movie_results .theater') as $div) {
             // print theater and address info
-            $this->output .= "Theatre:  ".$div->find('h2 a',0)->innertext."\n";
+            //TODO fix Theatre link and anchor text
+            $this->output .= "Theatre:  <a href=\"".$div->find('h2 a',0).">".$div->find('h2 a',0)->innertext."</a>\n";
 
             //TODO improve output formatting
             //TODO add links to trailers and movie detail info
@@ -46,9 +54,20 @@ class movieTimes
 
     }
 
+    /**
+     * Print the generated HTML
+     */
     public function printListings()
     {
         print $this->output;
+    }
+
+    /**
+     * print the entire DOM
+     */
+    public function printHTML()
+    {
+        print $this->html;
     }
 }
 
