@@ -1,5 +1,18 @@
 
 {
+  "name": "rogercreasy/showTimes",
+  "description": "Composer package that returns movie times for a given Zip Code; based on Google search results",
+  "keywords": ["movies", "showTimes"],
+  "homepage" : "https://github.com/RogerCreasy/Showtimes",
+  "type": "library",
+  "license": "The MIT License",
+  "authors": [
+    {
+      "name": "Roger Creasy",
+      "email": "roger.creasy@gmail.com"
+    }
+  ],
+
   "require": {
     "mgargano/simplehtmldom": "1.*"
   },
