@@ -40,7 +40,11 @@ class movieTimes
         foreach($this->html->find('#movie_results .theater') as $div) {
             // print theater and address info
             //TODO fix Theatre link and anchor text
-            $this->output .= "Theatre:  <a href=\"".$div->find('h2 a',0).">".$div->find('h2 a',0)->innertext."</a>\n";
+            $element = $div->find('a',0);
+            $link = $element->href;
+            $anchor = $element->innertext;
+            //TODO extract protected method to generate link, include Google
+            $this->output .= "Theatre:  <a href=\"".$link."\">".$anchor."</a>\n";
 
             //TODO improve output formatting
             //TODO add links to trailers and movie detail info
