@@ -14,20 +14,29 @@ class movieTimes
 {
     protected $html;
     protected $output;
+    protected $url;
 
     public function __construct($zip)
     {
-        $this->setHTML($zip = 27298);
+        $this->__setURL($zip = 27298);
+        $this->__setHTML();
         return $this->generateList();
     }
 
     /**
      * @param $zip
+     */
+    protected function __setURL($zip)
+    {
+        $this->url = 'http://www.google.com/movies?near=' . $zip;
+    }
+
+    /**
      * set $HTML to the Google URL
      */
-    protected function setHTML($zip)
+    protected function __setHTML()
     {
-        $this->html = file_get_html('http://www.google.com/movies?near=' . $zip);
+        $this->html = file_get_html($this->url);
     }
 
     /**
@@ -41,10 +50,9 @@ class movieTimes
             // print theater and address info
             //TODO fix Theatre link and anchor text
             $element = $div->find('a',0);
-            $link = $element->href;
-            $anchor = $element->innertext;
+            $tag = $this->__buildTheatreLink($element);
             //TODO extract protected method to generate link, include Google
-            $this->output .= "Theatre:  <a href=\"".$link."\">".$anchor."</a>\n";
+            $this->output .= "Theatre:  ".$tag;
 
             //TODO improve output formatting
             //TODO add links to trailers and movie detail info
@@ -56,6 +64,18 @@ class movieTimes
             $this->output .= "\n\n";
         }
 
+    }
+
+    /**
+     * FUnction to build out theatre link
+     */
+    protected function __buildTheatreLink($element)
+    {
+        $link = $element->href;
+        $anchor = $element->innertext;
+        $tag = "<a href=\"http://www.google.com".$link."\" target=\"_blank\">".$anchor."</a>\n\n";
+
+        return $tag;
     }
 
     /**
